@@ -1,6 +1,14 @@
+const cache = { 0: 0, 1: 1 }
+
 function fibonacci(n = 0) {
     n = parseInt(n)
-    return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2)
+
+    if (n in cache) return cache[n]
+
+    else {
+        cache[n] = fibonacci(n - 1) + fibonacci(n - 2)
+        return cache[n]
+    }
 }
 
 function makeFibonacciArray(to = 0) {

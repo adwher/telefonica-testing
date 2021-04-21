@@ -17,3 +17,14 @@ test("Make array with 10 numbers", function () {
 
     expect(result).toStrictEqual(expected)
 })
+
+test("Make array with 1000 numbers at least 3000ms", function () {
+    const start = Date.now()
+
+    makeFibonacciArray(1000)
+
+    const end = Date.now()
+    const timestamp = Math.abs(end - start)
+
+    expect(timestamp).toBeLessThan(3000)
+})
