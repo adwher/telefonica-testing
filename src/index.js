@@ -17,7 +17,7 @@ server.get("/fibo/:number", function (req, res) {
             return res
                 .status(400)
                 .send({
-                    message: `el valor '${req.params.number}' no es un número`
+                    error: `el valor '${req.params.number}' no es un número`
                 })
         }
 
@@ -25,7 +25,7 @@ server.get("/fibo/:number", function (req, res) {
             return res
                 .status(400)
                 .send({
-                    message: "la longitud no puede ser cero o negativa"
+                    error: "la longitud no puede ser cero o negativa"
                 })
         }
 
@@ -60,10 +60,16 @@ server.get("/quadratic", function (req, res) {
     }
 
     else {
-        return res.send({
-            message: "alguno de los campos necesarios no fue enviado"
-        })
+        return res
+            .status(400)
+            .send({
+                error: "alguno de los campos necesarios no fue enviado"
+            })
     }
+})
+
+server.use((req, res) => {
+    return res.redirect(307, "https://github.com/adwher/telefonica-testing#readme")
 })
 
 server.listen(process.env.PORT || 5000, function () {
